@@ -30,11 +30,11 @@ export const NavigationBar = ({ profile, isSticky }: NavigationBarProps) => {
         {profile ? (
           <Profile profile={profile} />
         ) : (
-          <a href={ROUTE.로그인}>
+          <Link href={ROUTE.로그인}>
             <Cta>
               <span className={cx("signin")}>{TEXT.login}</span>
             </Cta>
-          </a>
+          </Link>
         )}
       </div>
     </nav>
