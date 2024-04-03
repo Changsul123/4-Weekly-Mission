@@ -17,6 +17,12 @@
       "*": ["*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/component/SigninPage.js",
+    "src/component/SignupPage.js"
+  ],
   "exclude": ["node_modules"]
 }
