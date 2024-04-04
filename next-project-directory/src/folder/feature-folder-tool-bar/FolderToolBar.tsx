@@ -10,7 +10,7 @@ import {
   MODALS_ID,
 } from "./constant";
 import { ALL_LINKS_ID } from "link/data-access-link/constant";
-import { KeyboardEvent, useState } from "react";
+import { KeyboardEvent, useEffect, useState } from "react";
 import { ShareModal } from "folder/ui-share-modal";
 import { InputModal } from "sharing/ui-input-modal";
 import { AlertModal } from "sharing/ui-alert-modal";
@@ -33,12 +33,20 @@ export const FolderToolBar = ({
   const { shareKakao } = useKakaoSdk();
   const [currentModal, setCurrentModal] = useState<string | null>(null);
   const [inputValue, setInputValue] = useState<string>("");
+  const [shareLink, setShareLink] = useState("");
 
   const folderName =
     ALL_LINKS_ID === selectedFolderId
       ? ALL_LINKS_TEXT
       : folders?.find(({ id }) => id === selectedFolderId)?.name ?? "";
-  const shareLink = `${window.location.origin}/shared?user=1&folder=${selectedFolderId}`;
+
+  // const shareLink = `${window.location.origin}/shared?user=1&folder=${selectedFolderId}`;
+  useEffect(() => {
+    setShareLink(
+      `${window.location.origin}/shared?user=1&folder=${selectedFolderId}`
+    );
+  }, [selectedFolderId]);
+
   const closeModal = () => setCurrentModal(null);
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key === "Escape") {
