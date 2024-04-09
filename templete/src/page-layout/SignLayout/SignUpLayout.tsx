@@ -76,7 +76,7 @@ export const SignUpLayout = () => {
           <div className={cx("button")}>회원가입</div>
         </form>
         <div className={cx("share-container")}>
-          <div>소셜 로그인</div>
+          <div>다른 방식으로 로그인하기</div>
           <div className={cx("images")}>
             <div className={cx(["image", "google"])}>
               <img src={GOOGLE_IMAGE} />
