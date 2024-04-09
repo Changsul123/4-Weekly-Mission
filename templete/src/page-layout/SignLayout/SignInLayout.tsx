@@ -1,8 +1,4 @@
-import {
-  ChangeEventHandler,
-  FocusEventHandler,
-  HTMLInputTypeAttribute,
-} from "react";
+import { ChangeEventHandler, FocusEventHandler } from "react";
 import { Input } from "@/src/sharing/ui-input";
 import styles from "./SignInLayout.module.scss";
 import classNames from "classnames/bind";
