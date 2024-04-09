@@ -1,7 +1,7 @@
-import { SignOutLayout } from "@/src/page-layout/SignOutLayout/SignOutLayout";
+import { SignUpLayout } from "@/src/page-layout/SignLayout/SignUpLayout";
 
 const SignOut = () => {
-  return <SignOutLayout></SignOutLayout>;
+  return <SignUpLayout></SignUpLayout>;
 };
 
 export default SignOut;

@@ -11,17 +11,86 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  padding: 23.8rem 0;
 }
 
 .container {
   width: 40rem;
-  background-color: $color-white;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 3.2rem;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+
+  .article {
+    width: 21.8rem;
+    height: 7.8rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.6rem;
+
+    font-size: 1.6rem;
+    font-weight: 400;
+
+    .logo {
+      width: 210px;
+    }
+
+    div {
+      display: flex;
+      flex-direction: row;
+      gap: 0.8rem;
+    }
+
+    span {
+      position: relative;
+      top: -0.4rem;
+
+      font-weight: 600;
+      color: $color-primary;
+      border-bottom: 1px solid $color-primary;
+    }
+  }
+}
+
+.input {
+  width: 100%;
+  position: relative;
+
+  margin-top: 2.2rem;
+
+  .label {
+    position: absolute;
+    top: -2.2rem;
+
+    font-size: 1.4rem;
+    font-weight: 400;
+  }
+  img {
+    position: absolute;
+    top: 50%;
+    right: 1.6rem;
+    transform: translateY(-50%);
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+  p {
+    position: absolute;
+    bottom: -2rem;
+  }
 }
 
 .share-container {
@@ -39,8 +108,28 @@
   border: 1px solid $color-gray20;
 }
 
-.label {
-  text-align: left;
+.button {
+  background: linear-gradient(90.99deg, #6d6afe 0.12%, #6ae3fe 101.84%);
+  width: 40rem;
+  height: 5.3rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  border-radius: 0.8rem;
+
+  padding: 16px 20px;
+
+  color: $color-white;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.share-container {
+  font-size: 1.4rem;
+  font-weight: 400;
 }
 
 .images {
@@ -48,6 +137,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: 1.6rem;
 }
 
 .image {
