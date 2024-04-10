@@ -15,10 +15,10 @@ export const SignInLayout = () => {
   const [value, setValue] = useState({
     email: "",
     password: "",
-    type: "password",
-    eyeIcon: EYE_OFF_IMAGE,
+    passwordType: "password",
+    pweyeIcon: EYE_OFF_IMAGE,
     emailMessage: "",
-    passWardMessage: "",
+    passWordMessage: "",
     placeholderEmail: "이메일을 입력해주세요.",
     placeholderPassword: "영문, 숫자를 조합해 8자 이상 입력해주세요.",
     hasError: false,
@@ -39,14 +39,15 @@ export const SignInLayout = () => {
   const handlePasswordBlur: FocusEventHandler<HTMLInputElement> = (e) => {
     setValue((prevValue) => ({
       ...prevValue,
-      passWardMessage: e.target.value === "" ? "입력값 없음" : "",
+      passWordMessage: e.target.value === "" ? "입력값 없음" : "",
     }));
   };
   const handleEyeClick: MouseEventHandler<HTMLImageElement> = (e) => {
     setValue((prevValue) => ({
       ...prevValue,
-      type: value.type === "password" ? "text" : "password",
-      eyeIcon: value.eyeIcon === EYE_OFF_IMAGE ? EYE_ON_IMAGE : EYE_OFF_IMAGE,
+      passwordType: value.passwordType === "password" ? "text" : "password",
+      pweyeIcon:
+        value.pweyeIcon === EYE_OFF_IMAGE ? EYE_ON_IMAGE : EYE_OFF_IMAGE,
     }));
   };
 
@@ -80,15 +81,15 @@ export const SignInLayout = () => {
             <Input
               value={value.password}
               placeholder={value.placeholderPassword}
-              type={value.type}
+              type={value.passwordType}
               hasError={value.hasError}
-              helperText={value.passWardMessage}
+              helperText={value.passWordMessage}
               onChange={handlepasswordChange}
               onBlur={handlePasswordBlur}
             />
             <img
               className={cx("eye-icon")}
-              src={value.eyeIcon}
+              src={value.pweyeIcon}
               onClick={handleEyeClick}
             />
           </div>
