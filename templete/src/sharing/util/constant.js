@@ -1,8 +1,11 @@
 export const ROUTE = {
   랜딩: "/",
   로그인: "/signin",
+  회원가입: "/signup",
   개인정보처리방침: "/privacy",
   FAQ: "/faq",
+  구글: "https://www.google.com",
+  카카오톡: "https://www.kakaocorp.com/page",
 };
 
 const second = 1000;

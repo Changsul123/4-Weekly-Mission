@@ -3,6 +3,9 @@ import { ChangeEventHandler, FocusEventHandler } from "react";
 import { Input } from "@/src/sharing/ui-input";
 import styles from "./SignUpLayout.module.scss";
 import classNames from "classnames/bind";
+import { ROUTE } from "@/src/sharing/util";
+import Link from "next/link";
+import { SocialSignUp } from "@/components/SocialSignup";
 const cx = classNames.bind(styles);
 
 export const LOGO_IMAGE = "images/linkbrary.svg";
@@ -95,7 +98,10 @@ export const SignUpLayout = () => {
               alt="Linkbrary 서비스 로고"
             />
             <div>
-              이미 회원이신가요? <span>로그인하기</span>
+              이미 회원이신가요?{" "}
+              <Link href={ROUTE.로그인}>
+                <span>로그인하기</span>
+              </Link>
             </div>
           </div>
           <div className={cx(["email", "input"])}>
@@ -145,17 +151,7 @@ export const SignUpLayout = () => {
           </div>
           <div className={cx("button")}>회원가입</div>
         </form>
-        <div className={cx("share-container")}>
-          <div>다른 방식으로 로그인하기</div>
-          <div className={cx("images")}>
-            <div className={cx(["image", "google"])}>
-              <img src={GOOGLE_IMAGE} />
-            </div>
-            <div className={cx(["image", "kakaotalk"])}>
-              <img src={KAKAOTALK_IMAGE} />
-            </div>
-          </div>
-        </div>
+        <SocialSignUp />
       </div>
     </div>
   );
