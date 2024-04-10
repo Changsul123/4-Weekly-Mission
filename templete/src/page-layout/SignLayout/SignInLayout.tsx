@@ -4,6 +4,7 @@ import { Input } from "@/src/sharing/ui-input";
 import styles from "./SignInLayout.module.scss";
 import classNames from "classnames/bind";
 import { Logo } from "@/components/Logo";
+import { Button } from "@/components/Button";
 import { EyeIcon } from "@/components/EyeIcon";
 import { SocialSignIn } from "@/components/SocialSignIn";
 
@@ -78,7 +79,7 @@ export const SignInLayout = () => {
             />
             <EyeIcon src={value.pwEyeIcon} onClick={handleEyeClick} />
           </div>
-          <div className={cx("button")}>로그인</div>
+          <Button email={value.email} password={value.password} />
         </form>
         <SocialSignIn />
       </div>

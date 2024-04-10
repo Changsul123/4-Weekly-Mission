@@ -51,22 +51,3 @@
     bottom: -2rem;
   }
 }
-
-.button {
-  background: linear-gradient(90.99deg, #6d6afe 0.12%, #6ae3fe 101.84%);
-  width: 40rem;
-  height: 5.3rem;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-
-  border-radius: 0.8rem;
-
-  padding: 16px 20px;
-
-  color: $color-white;
-  font-size: 1.8rem;
-  font-weight: 600;
-}

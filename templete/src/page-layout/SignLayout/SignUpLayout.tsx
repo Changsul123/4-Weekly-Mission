@@ -4,6 +4,7 @@ import { Input } from "@/src/sharing/ui-input";
 import styles from "./SignUpLayout.module.scss";
 import classNames from "classnames/bind";
 import { Logo } from "@/components/Logo";
+import { Button } from "@/components/Button";
 import { EyeIcon } from "@/components/EyeIcon";
 import { SocialSignUp } from "@/components/SocialSignup";
 
@@ -127,7 +128,7 @@ export const SignUpLayout = () => {
               onClick={handleConfirmPasswordType}
             />
           </div>
-          <div className={cx("button")}>회원가입</div>
+          <Button email={value.email} password={value.password} />
         </form>
         <SocialSignUp />
       </div>
