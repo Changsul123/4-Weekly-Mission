@@ -3,13 +3,11 @@ import { ChangeEventHandler, FocusEventHandler } from "react";
 import { Input } from "@/src/sharing/ui-input";
 import styles from "./SignUpLayout.module.scss";
 import classNames from "classnames/bind";
-import { ROUTE } from "@/src/sharing/util";
-import Link from "next/link";
+import { Logo } from "@/components/Logo";
 import { EyeIcon } from "@/components/EyeIcon";
 import { SocialSignUp } from "@/components/SocialSignup";
-const cx = classNames.bind(styles);
 
-export const LOGO_IMAGE = "images/linkbrary.svg";
+const cx = classNames.bind(styles);
 
 export const SignUpLayout = () => {
   const [value, setValue] = useState({
@@ -88,19 +86,7 @@ export const SignUpLayout = () => {
     <div className={cx("background")}>
       <div className={cx("container")}>
         <form className={cx("input-container")}>
-          <div className={cx("article")}>
-            <img
-              className={cx("logo")}
-              src={LOGO_IMAGE}
-              alt="Linkbrary 서비스 로고"
-            />
-            <div>
-              이미 회원이신가요?{" "}
-              <Link href={ROUTE.로그인}>
-                <span>로그인하기</span>
-              </Link>
-            </div>
-          </div>
+          <Logo />
           <div className={cx(["email", "input"])}>
             <div className={cx("label")}>이메일</div>
             <Input
