@@ -1,4 +1,8 @@
-import { ChangeEventHandler, FocusEventHandler, HTMLInputTypeAttribute } from "react";
+import {
+  ChangeEventHandler,
+  FocusEventHandler,
+  HTMLInputTypeAttribute,
+} from "react";
 import styles from "./Input.module.scss";
 import classNames from "classnames/bind";
 
@@ -33,7 +37,9 @@ export const Input = ({
         placeholder={placeholder}
         className={cx("input", { error: hasError })}
       />
-      {helperText && <p className={cx("helper-text", { error: hasError })}>{helperText}</p>}
+      {helperText && (
+        <p className={cx("helper-text", { error: hasError })}>{helperText}</p>
+      )}
     </div>
   );
 };
