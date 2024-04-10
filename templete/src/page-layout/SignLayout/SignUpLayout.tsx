@@ -5,14 +5,11 @@ import styles from "./SignUpLayout.module.scss";
 import classNames from "classnames/bind";
 import { ROUTE } from "@/src/sharing/util";
 import Link from "next/link";
+import { EyeIcon } from "@/components/EyeIcon";
 import { SocialSignUp } from "@/components/SocialSignup";
 const cx = classNames.bind(styles);
 
 export const LOGO_IMAGE = "images/linkbrary.svg";
-export const GOOGLE_IMAGE = "images/google.svg";
-export const KAKAOTALK_IMAGE = "images/kakaotalk.svg";
-export const EYE_ON_IMAGE = "images/eye-on.svg";
-export const EYE_OFF_IMAGE = "images/eye-off.svg";
 
 export const SignUpLayout = () => {
   const [value, setValue] = useState({
@@ -21,8 +18,8 @@ export const SignUpLayout = () => {
     confirmPassword: "",
     passwordType: "password",
     confirmPasswordType: "password",
-    pwEyeIcon: EYE_OFF_IMAGE,
-    cpEyeIcon: EYE_OFF_IMAGE,
+    pwEyeIcon: "EYE_OFF_IMAGE",
+    cpEyeIcon: "EYE_OFF_IMAGE",
     emailMessage: "",
     passWordMessage: "",
     ConfirmPasswordMessage: "",
@@ -71,7 +68,7 @@ export const SignUpLayout = () => {
       ...prevValue,
       passwordType: value.passwordType === "password" ? "text" : "password",
       pwEyeIcon:
-        value.pwEyeIcon === EYE_OFF_IMAGE ? EYE_ON_IMAGE : EYE_OFF_IMAGE,
+        value.pwEyeIcon === "EYE_OFF_IMAGE" ? "EYE_ON_IMAGE" : "EYE_OFF_IMAGE",
     }));
     console.log(value.passwordType);
   };
@@ -83,7 +80,7 @@ export const SignUpLayout = () => {
       confirmPasswordType:
         value.confirmPasswordType === "password" ? "text" : "password",
       cpEyeIcon:
-        value.cpEyeIcon === EYE_OFF_IMAGE ? EYE_ON_IMAGE : EYE_OFF_IMAGE,
+        value.cpEyeIcon === "EYE_OFF_IMAGE" ? "EYE_ON_IMAGE" : "EYE_OFF_IMAGE",
     }));
   };
 
@@ -126,11 +123,7 @@ export const SignUpLayout = () => {
               onChange={handlepasswordChange}
               onBlur={handlePasswordBlur}
             />
-            <img
-              className={cx("eye-icon")}
-              src={value.pwEyeIcon}
-              onClick={handlePasswordType}
-            />
+            <EyeIcon src={value.pwEyeIcon} onClick={handlePasswordType} />
           </div>
           <div className={cx(["password", "input"])}>
             <div className={cx("label")}>비밀번호 확인</div>
@@ -143,8 +136,7 @@ export const SignUpLayout = () => {
               onChange={handlepasswordCorrectChange}
               onBlur={handlePasswordCorrectBlur}
             />
-            <img
-              className={cx("eye-icon")}
+            <EyeIcon
               src={value.cpEyeIcon}
               onClick={handleConfirmPasswordType}
             />

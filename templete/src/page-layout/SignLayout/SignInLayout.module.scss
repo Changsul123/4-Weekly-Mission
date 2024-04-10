@@ -71,7 +71,6 @@
   position: relative;
 
   margin-top: 2.2rem;
-  // z-index: $z-index-nav;
 
   .label {
     position: absolute;
@@ -79,14 +78,6 @@
 
     font-size: 1.4rem;
     font-weight: 400;
-  }
-  img {
-    position: absolute;
-    top: 50%;
-    right: 1.6rem;
-    transform: translateY(-50%);
-    width: 1.6rem;
-    height: 1.6rem;
   }
   p {
     position: absolute;

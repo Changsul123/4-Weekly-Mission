@@ -5,21 +5,18 @@ import styles from "./SignInLayout.module.scss";
 import classNames from "classnames/bind";
 import { ROUTE } from "@/src/sharing/util";
 import Link from "next/link";
+import { EyeIcon } from "@/components/EyeIcon";
 import { SocialSignIn } from "@/components/SocialSignIn";
 const cx = classNames.bind(styles);
 
 export const LOGO_IMAGE = "images/linkbrary.svg";
-export const GOOGLE_IMAGE = "images/google.svg";
-export const KAKAOTALK_IMAGE = "images/kakaotalk.svg";
-export const EYE_ON_IMAGE = "images/eye-on.svg";
-export const EYE_OFF_IMAGE = "images/eye-off.svg";
 
 export const SignInLayout = () => {
   const [value, setValue] = useState({
     email: "",
     password: "",
     passwordType: "password",
-    pweyeIcon: EYE_OFF_IMAGE,
+    pwEyeIcon: "EYE_OFF_IMAGE",
     emailMessage: "",
     passWordMessage: "",
     placeholderEmail: "이메일을 입력해주세요.",
@@ -49,8 +46,8 @@ export const SignInLayout = () => {
     setValue((prevValue) => ({
       ...prevValue,
       passwordType: value.passwordType === "password" ? "text" : "password",
-      pweyeIcon:
-        value.pweyeIcon === EYE_OFF_IMAGE ? EYE_ON_IMAGE : EYE_OFF_IMAGE,
+      pwEyeIcon:
+        value.pwEyeIcon === "EYE_OFF_IMAGE" ? "EYE_ON_IMAGE" : "EYE_OFF_IMAGE",
     }));
   };
 
@@ -93,11 +90,7 @@ export const SignInLayout = () => {
               onChange={handlepasswordChange}
               onBlur={handlePasswordBlur}
             />
-            <img
-              className={cx("eye-icon")}
-              src={value.pweyeIcon}
-              onClick={handleEyeClick}
-            />
+            <EyeIcon src={value.pwEyeIcon} onClick={handleEyeClick} />
           </div>
           <div className={cx("button")}>로그인</div>
         </form>
