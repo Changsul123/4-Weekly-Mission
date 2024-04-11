@@ -1,75 +1,99 @@
 import React, { MouseEventHandler, useState } from "react";
 import { ChangeEventHandler, FocusEventHandler } from "react";
-import { Input } from "@/src/sharing/ui-input";
 import styles from "./SignUpLayout.module.scss";
 import classNames from "classnames/bind";
+
 import { Logo } from "@/components/Logo";
+import { Input } from "@/src/sharing/ui-input";
 import { Button } from "@/components/Button";
 import { EyeIcon } from "@/components/EyeIcon";
 import { SocialSignUp } from "@/components/SocialSignup";
+import useValidation from "@/src/sharing/util/useValidation";
 
 const cx = classNames.bind(styles);
+const placeholderEmail = "이메일을 입력해주세요.";
+const placeholderPassword = "영문, 숫자를 조합해 8자 이상 입력해주세요.";
+const placeholderConfirmPassword = "비밀번호와 일치하는 값을 입력해주세요.";
 
 export const SignUpLayout = () => {
   const [value, setValue] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
     passwordType: "password",
     confirmPasswordType: "password",
-    pwEyeIcon: "EYE_OFF_IMAGE",
-    cpEyeIcon: "EYE_OFF_IMAGE",
-    emailMessage: "",
-    passWordMessage: "",
-    ConfirmPasswordMessage: "",
-    placeholderEmail: "이메일을 입력해주세요.",
-    placeholderPassword: "영문, 숫자를 조합해 8자 이상 입력해주세요.",
-    placeholderConfirmPassword: "비밀번호와 일치하는 값을 입력해주세요.",
-    hasError: false,
+    emailHasError: false,
+    passwordHasError: false,
+    confirmPasswordHasError: false,
+  });
+
+  const emailValidation = useValidation("", {
+    required: { value: true, message: "이메일을 입력해주세요." },
+  });
+  const passwordValidation = useValidation("", {
+    required: { value: true, message: "비밀번호를 입력해주세요." },
+  });
+  const confirmPasswordValidation = useValidation("", {
+    required: { value: true, message: "비밀번호를 입력해주세요." },
   });
 
   const handleEmailChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setValue((prevValue) => ({ ...prevValue, email: e.target.value }));
+    emailValidation.setInput(e.target.value);
   };
   const handlepasswordChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setValue((prevValue) => ({ ...prevValue, password: e.target.value }));
+    passwordValidation.setInput(e.target.value);
   };
   const handlepasswordCorrectChange: ChangeEventHandler<HTMLInputElement> = (
     e
   ) => {
-    setValue((prevValue) => ({
-      ...prevValue,
-      confirmPassword: e.target.value,
-    }));
+    confirmPasswordValidation.setInput(e.target.value);
   };
   const handleEmailBlur: FocusEventHandler<HTMLInputElement> = (e) => {
-    setValue((prevValue) => ({
-      ...prevValue,
-      emailMessage: e.target.value === "" ? "입력값 없음" : "",
-    }));
+    emailValidation.validate();
+    if (emailValidation.validate()) {
+      setValue((prevValue) => ({
+        ...prevValue,
+        emailHasError: false,
+      }));
+    } else {
+      setValue((prevValue) => ({
+        ...prevValue,
+        emailHasError: true,
+      }));
+    }
   };
   const handlePasswordBlur: FocusEventHandler<HTMLInputElement> = (e) => {
-    setValue((prevValue) => ({
-      ...prevValue,
-      passWordMessage: e.target.value === "" ? "입력값 없음" : "",
-    }));
+    passwordValidation.validate();
+    if (passwordValidation.validate()) {
+      setValue((prevValue) => ({
+        ...prevValue,
+        passwordHasError: false,
+      }));
+    } else {
+      setValue((prevValue) => ({
+        ...prevValue,
+        passwordHasError: true,
+      }));
+    }
   };
   const handlePasswordCorrectBlur: FocusEventHandler<HTMLInputElement> = (
     e
   ) => {
-    setValue((prevValue) => ({
-      ...prevValue,
-      ConfirmPasswordMessage: e.target.value === "" ? "입력값 없음" : "",
-    }));
+    confirmPasswordValidation.validate();
+    if (confirmPasswordValidation.validate()) {
+      setValue((prevValue) => ({
+        ...prevValue,
+        confirmPasswordHasError: false,
+      }));
+    } else {
+      setValue((prevValue) => ({
+        ...prevValue,
+        confirmPasswordHasError: true,
+      }));
+    }
   };
   const handlePasswordType: MouseEventHandler<HTMLImageElement> = (e) => {
     setValue((prevValue) => ({
       ...prevValue,
       passwordType: value.passwordType === "password" ? "text" : "password",
-      pwEyeIcon:
-        value.pwEyeIcon === "EYE_OFF_IMAGE" ? "EYE_ON_IMAGE" : "EYE_OFF_IMAGE",
     }));
-    console.log(value.passwordType);
   };
   const handleConfirmPasswordType: MouseEventHandler<HTMLImageElement> = (
     e
@@ -78,8 +102,6 @@ export const SignUpLayout = () => {
       ...prevValue,
       confirmPasswordType:
         value.confirmPasswordType === "password" ? "text" : "password",
-      cpEyeIcon:
-        value.cpEyeIcon === "EYE_OFF_IMAGE" ? "EYE_ON_IMAGE" : "EYE_OFF_IMAGE",
     }));
   };
 
@@ -91,10 +113,10 @@ export const SignUpLayout = () => {
           <div className={cx(["email", "input"])}>
             <div className={cx("label")}>이메일</div>
             <Input
-              value={value.email}
-              placeholder={value.placeholderEmail}
-              hasError={value.hasError}
-              helperText={value.emailMessage}
+              value={emailValidation.input}
+              placeholder={placeholderEmail}
+              hasError={value.emailHasError}
+              helperText={emailValidation.error}
               onChange={handleEmailChange}
               onBlur={handleEmailBlur}
             />
@@ -102,33 +124,36 @@ export const SignUpLayout = () => {
           <div className={cx(["password", "input"])}>
             <div className={cx("label")}>비밀번호</div>
             <Input
-              value={value.password}
-              placeholder={value.placeholderPassword}
+              value={passwordValidation.input}
+              placeholder={placeholderPassword}
               type={value.passwordType}
-              hasError={value.hasError}
-              helperText={value.passWordMessage}
+              hasError={value.passwordHasError}
+              helperText={passwordValidation.error}
               onChange={handlepasswordChange}
               onBlur={handlePasswordBlur}
             />
-            <EyeIcon src={value.pwEyeIcon} onClick={handlePasswordType} />
+            <EyeIcon src={value.passwordType} onClick={handlePasswordType} />
           </div>
           <div className={cx(["password", "input"])}>
             <div className={cx("label")}>비밀번호 확인</div>
             <Input
-              value={value.confirmPassword}
-              placeholder={value.placeholderConfirmPassword}
+              value={confirmPasswordValidation.input}
+              placeholder={placeholderConfirmPassword}
               type={value.confirmPasswordType}
-              hasError={value.hasError}
-              helperText={value.ConfirmPasswordMessage}
+              hasError={value.confirmPasswordHasError}
+              helperText={confirmPasswordValidation.error}
               onChange={handlepasswordCorrectChange}
               onBlur={handlePasswordCorrectBlur}
             />
             <EyeIcon
-              src={value.cpEyeIcon}
+              src={value.confirmPasswordType}
               onClick={handleConfirmPasswordType}
             />
           </div>
-          <Button email={value.email} password={value.password} />
+          <Button
+            email={emailValidation.input}
+            password={passwordValidation.input}
+          />
         </form>
         <SocialSignUp />
       </div>

@@ -23,9 +23,7 @@ export const Button = ({ email, password }: ButtonProps) => {
             router.push("/folder");
           }
         });
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   const handleSignUpApiRequest = async () => {
     try {
@@ -39,9 +37,7 @@ export const Button = ({ email, password }: ButtonProps) => {
             router.push("/folder");
           }
         });
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const router = useRouter();

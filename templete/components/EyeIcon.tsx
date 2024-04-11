@@ -12,6 +12,6 @@ export type EyeIconProps = {
 };
 
 export const EyeIcon = ({ src, onClick }: EyeIconProps) => {
-  const srcImg = src === "EYE_ON_IMAGE" ? EYE_ON_IMAGE : EYE_OFF_IMAGE;
+  const srcImg = src === "text" ? EYE_ON_IMAGE : EYE_OFF_IMAGE;
   return <img className={cx("eye-icon")} src={srcImg} onClick={onClick} />;
 };
