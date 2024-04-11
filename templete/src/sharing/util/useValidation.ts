@@ -6,9 +6,9 @@ interface Validation {
     message: string;
   };
   pattern?: {
-    value: string;
+    value: RegExp;
     message: string;
-  };
+  }[];
   custom?: {
     isValid: (value: string) => boolean;
     message: string;
@@ -33,15 +33,14 @@ const useValidation = (initialValue: string, validations: Validation) => {
       }
       if (validation === "pattern") {
         const currentValidation = validations[validation] as {
-          value: string;
+          value: RegExp;
           message: string;
-        };
-        if (
-          currentValidation.value &&
-          !RegExp(currentValidation.value).test(input)
-        ) {
-          setError(currentValidation.message);
-          return false;
+        }[];
+        for (const patternValidation of currentValidation) {
+          if (patternValidation.value && !patternValidation.value.test(input)) {
+            setError(patternValidation.message);
+            return false;
+          }
         }
       }
       if (validation === "custom") {
