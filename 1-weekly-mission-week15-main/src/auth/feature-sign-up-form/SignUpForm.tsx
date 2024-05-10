@@ -1,7 +1,8 @@
 import { Input } from "@/src/sharing/ui-input";
 import { PasswordInput } from "@/src/sharing/ui-password-input";
 import { Controller, useForm } from "react-hook-form";
-import { useCheckEmailDuplicate, useSignUp } from "../data-access-auth";
+import { useCheckEmailDuplicate } from "../data-access-auth/useCheckEmailDuplicate";
+import { usePostSignup } from "../data-access-auth/api";
 import { ERROR_MESSAGE, PLACEHOLDER } from "./constant";
 import styles from "./SignUpForm.module.scss";
 import classNames from "classnames/bind";
@@ -16,16 +17,20 @@ export const SignUpForm = () => {
     mode: "onBlur",
     reValidateMode: "onBlur",
   });
-  const { execute: checkEmailDuplicate } = useCheckEmailDuplicate(watch("email"));
-  const { execute: signUp, data } = useSignUp({
-    email: watch("email"),
-    password: watch("password"),
-  });
+  const { execute: checkEmailDuplicate } = useCheckEmailDuplicate(
+    watch("email")
+  );
+  const { mutate: signUp, data } = usePostSignup();
 
-  useTokenRedirect(data?.data.accessToken);
+  useTokenRedirect(data?.data?.accessToken);
 
   return (
-    <form className={cx("form")} onSubmit={handleSubmit(signUp)}>
+    <form
+      className={cx("form")}
+      onSubmit={handleSubmit((formData) =>
+        signUp({ email: formData.email, password: formData.password })
+      )}
+    >
       <div className={cx("input-box")}>
         <label className={cx("label")}>이메일</label>
         <Controller
@@ -33,7 +38,10 @@ export const SignUpForm = () => {
           name="email"
           rules={{
             required: ERROR_MESSAGE.emailRequired,
-            pattern: { value: /\S+@\S+\.\S+/, message: ERROR_MESSAGE.emailInvalid },
+            pattern: {
+              value: /\S+@\S+\.\S+/,
+              message: ERROR_MESSAGE.emailInvalid,
+            },
             validate: {
               alreadyExist: async () => {
                 const response = await checkEmailDuplicate();

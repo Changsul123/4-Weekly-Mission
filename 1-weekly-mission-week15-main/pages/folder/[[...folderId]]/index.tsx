@@ -1,5 +1,4 @@
-import { useGetFolders } from "@/src/folder/data-access-folder";
-import { useGetLinks } from "@/src/link/data-access-link";
+import { useGetFolders, useGetLinks } from "@/src/auth/data-access-auth/api";
 import { Layout } from "@/src/sharing/feature-layout";
 import { FolderLayout } from "@/src/page-layout/FolderLayout";
 import { FolderToolBar } from "@/src/folder/feature-folder-tool-bar";
@@ -21,9 +20,13 @@ const FolderPage = () => {
     }
     return undefined;
   }, [router.isReady, folderId]);
+
   const { data: folders } = useGetFolders();
-  const { data: links, loading } = useGetLinks(currentFolderId);
-  const { searchValue, handleChange, handleCloseClick, result } = useSearchLink(links);
+  const { data: links, isLoading } = useGetLinks();
+
+  const { searchValue, handleChange, handleCloseClick, result } =
+    useSearchLink(links);
+
   const { ref, isIntersecting } = useIntersectionObserver<HTMLDivElement>();
 
   useEffect(() => {
@@ -38,10 +41,16 @@ const FolderPage = () => {
       <FolderLayout
         linkForm={<LinkForm hideFixedLinkForm={isIntersecting} />}
         searchBar={
-          <SearchBar value={searchValue} onChange={handleChange} onCloseClick={handleCloseClick} />
+          <SearchBar
+            value={searchValue}
+            onChange={handleChange}
+            onCloseClick={handleCloseClick}
+          />
         }
-        folderToolBar={<FolderToolBar folders={folders} selectedFolderId={currentFolderId} />}
-        cardList={loading ? null : <CardList links={result} />}
+        folderToolBar={
+          <FolderToolBar folders={folders} selectedFolderId={currentFolderId} />
+        }
+        cardList={isLoading ? null : <CardList links={result} />}
       />
     </Layout>
   );

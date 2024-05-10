@@ -44,17 +44,19 @@ export const AddLinkModal = ({
         content={
           <div className={cx("modal-content")}>
             <div className={cx("folder-list")}>
-              {folders?.map(({ id, name, linkCount }) => (
+              {folders?.map(({ id, name, link_Count }) => (
                 <FolderItem
                   key={id}
                   isSelected={id === selectedFolderId}
                   folderName={name}
-                  linkCount={linkCount}
+                  linkCount={link_Count}
                   onClick={() => setSelectedFolderId(id)}
                 />
               ))}
             </div>
-            <ModalContentButton onClick={onAddClick}>추가하기</ModalContentButton>
+            <ModalContentButton onClick={onAddClick}>
+              추가하기
+            </ModalContentButton>
           </div>
         }
         onCloseClick={onCloseClick}

@@ -1,7 +1,7 @@
 import { Link } from "@/src/link/type";
 import { ChangeEventHandler, MouseEventHandler, useState } from "react";
 
-export const useSearchLink = (links: Link[]) => {
+export const useSearchLink = (links: Link[] | undefined) => {
   const [searchValue, setSearchValue] = useState("");
   const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     setSearchValue(event.target.value);
@@ -10,7 +10,7 @@ export const useSearchLink = (links: Link[]) => {
     setSearchValue("");
   };
 
-  const result = links.filter((link) => {
+  const result = links?.filter((link) => {
     const searchValueLowerCase = searchValue?.toLowerCase();
     const titleLowerCase = link?.title?.toLowerCase();
     const descriptionLowerCase = link?.description?.toLowerCase();

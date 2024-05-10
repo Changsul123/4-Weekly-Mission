@@ -1,4 +1,4 @@
-import { useGetFolders } from "@/src/folder/data-access-folder";
+import { useGetFolders } from "@/src/auth/data-access-auth/api";
 import { AddLinkModal } from "@/src/link/ui-add-link-modal";
 import { EditableCard } from "@/src/link/ui-editable-card";
 import { NoLink } from "@/src/link/ui-no-link";
@@ -9,7 +9,7 @@ import { MODALS_ID } from "./constant";
 import { Link } from "@/src/link/type";
 
 type CardListProps = {
-  links: Link[];
+  links: Link[] | undefined;
 };
 
 export const CardList = ({ links }: CardListProps) => {
@@ -43,10 +43,12 @@ export const CardList = ({ links }: CardListProps) => {
     [cardListRef]
   );
 
-  if (links.length === 0) return <NoLink />;
+  if (links?.length === 0) return <NoLink />;
+  console.log(folders);
+  console.log(links);
   return (
     <UiCardList ref={cardListRef}>
-      {links.map((link, index) => (
+      {links?.map((link, index) => (
         <EditableCard
           key={link?.id}
           {...link}

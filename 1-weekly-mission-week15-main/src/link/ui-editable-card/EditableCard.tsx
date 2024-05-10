@@ -1,6 +1,12 @@
 import styles from "./EditableCard.module.scss";
 import classNames from "classnames/bind";
-import { CSSProperties, MouseEventHandler, useCallback, useRef, useState } from "react";
+import {
+  CSSProperties,
+  MouseEventHandler,
+  useCallback,
+  useRef,
+  useState,
+} from "react";
 import { Card } from "@/src/sharing/ui-card";
 import { CardContent } from "@/src/sharing/ui-card-content";
 import { CardImage } from "@/src/sharing/ui-card-image";
@@ -10,11 +16,11 @@ const cx = classNames.bind(styles);
 
 type EditableCardProps = {
   url: string;
-  imageSource: string;
+  image_source: string;
   alt: string;
   elapsedTime: string;
   description: string;
-  createdAt: string;
+  created_at: string;
   popoverPosition: {
     top?: CSSProperties["top"];
     right?: CSSProperties["right"];
@@ -27,11 +33,11 @@ type EditableCardProps = {
 
 export const EditableCard = ({
   url,
-  imageSource,
+  image_source,
   alt,
   elapsedTime,
   description,
-  createdAt,
+  created_at,
   popoverPosition,
   onDeleteClick,
   onAddToFolderClick,
@@ -62,17 +68,28 @@ export const EditableCard = ({
   return (
     <a href={url} target="_blank" rel="noopener noreferrer">
       <Card onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave}>
-        <CardImage imageSource={imageSource} alt={alt} isZoomedIn={isHovered} />
+        <CardImage
+          imageSource={image_source}
+          alt={alt}
+          isZoomedIn={isHovered}
+        />
         <CardContent
           elapsedTime={elapsedTime}
           description={description}
-          createdAt={createdAt}
+          createdAt={created_at}
           isHovered={isHovered}
         />
-        <button className={cx("star")} onClick={(event) => event.preventDefault()}>
+        <button
+          className={cx("star")}
+          onClick={(event) => event.preventDefault()}
+        >
           <img src="/images/star.svg" alt="즐겨찾기를 나타내는 별" />
         </button>
-        <button ref={kebabButtonRef} className={cx("kebab")} onClick={handleKebabClick}>
+        <button
+          ref={kebabButtonRef}
+          className={cx("kebab")}
+          onClick={handleKebabClick}
+        >
           <img src="/images/kebab.svg" alt="더보기를 나타내는 점 3개" />
         </button>
         <Popover

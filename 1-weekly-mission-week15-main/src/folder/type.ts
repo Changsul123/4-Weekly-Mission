@@ -11,22 +11,12 @@ export type SampleFolderRawData = {
   links: SampleLinkRawData[];
 };
 
-export type FolderRawData = {
-  id: number;
-  created_at: string;
-  name: string;
-  user_id: number;
-  link?: {
-    count: number;
-  };
-};
-
 export type Folder = {
   id: number;
-  createdAt: string;
+  created_At: string;
   name: string;
   userId: number;
-  linkCount: number;
+  link_Count: number;
 };
 
 export type SelectedFolderId = number | "all";
